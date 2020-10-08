@@ -63,7 +63,7 @@ The switch is trigged by the remote-control device. The motion sensors can be us
 This plugin has been created based on the [homebridge-plugin-template](https://github.com/homebridge/homebridge-plugin-template).
 Description of characteristics (available methods and how to build listener) can be found in the [Homebridge-API](https://developers.homebridge.io/#/)
 
-A special thanks to Github-User [dwyschka](https://github.com/dwyschka), who inspired me to adapt his [Red-Node Project](https://github.com/dwyschka/node-red-contrib-hsp) to Homebridge.
+A special thanks to Github-User [NityBZ](https://github.com/nitaybz), who inspired me to adapt his [Project](https://github.com/nitaybz/homebridge-delay-switch) for my personal needs.
 
 ## Start in Developer Mode
 
