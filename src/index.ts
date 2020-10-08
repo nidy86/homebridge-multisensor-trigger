@@ -72,7 +72,7 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
     this.delay = config['delay'] as number;
     this.sensors = config['sensors'] as number || 1;
 
-    let UUIDGen = api.hap.uuid;
+    const UUIDGen = api.hap.uuid;
 
     this.uuid = UUIDGen.generate(this.name);
 
@@ -80,7 +80,7 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
       .setCharacteristic(hap.Characteristic.Manufacturer, "Nidy86@Git")
       .setCharacteristic(hap.Characteristic.Model, "Multisensor Trigger");
 
-    this.switchService = new hap.Service.Switch(this.name,"Switch");
+    this.switchService = new hap.Service.Switch(this.name, "Switch");
     this.switchService.getCharacteristic(hap.Characteristic.On)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
         log.info("Current state of the switch was returned: " + (this.switchOn? "ON": "OFF"));
@@ -97,7 +97,7 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
           this.timer = setTimeout(() => {
             this.switchService.getCharacteristic(hap.Characteristic.On).updateValue(false);
             this.switchOn = false;
-          },1000);
+          }, 1000);
         } else {
           this.switchOn = false;
           clearTimeout(this.timer);
@@ -109,13 +109,13 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
       });
     
     this.sensorsService = [];
-    for(var _i=0; _i<this.sensors; _i++){
+    for(let _i=0; _i<this.sensors; _i++){
       const motionSensor = new hap.Service.MotionSensor(this.name + " Trigger " + (_i+1), "Motion" + _i );
       motionSensor
         .getCharacteristic(hap.Characteristic.MotionDetected)
         .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) =>{
-          var idx = _i+1;
-          callback(null, (this.switchTriggerState==idx));
+          const idx = _i+1;
+          callback(null, (this.switchTriggerState===idx));
         });
       this.sensorsService.push(motionSensor);
     }
@@ -124,9 +124,9 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
   }
 
   updateSensors(): void {
-    for(let _i in this.sensorsService){
-      var idx = parseInt(_i)+1;
-      this.sensorsService[_i].getCharacteristic(hap.Characteristic.MotionDetected).updateValue(this.switchTriggerState==idx);
+    for(const _i in this.sensorsService){
+      const idx = parseInt(_i)+1;
+      this.sensorsService[_i].getCharacteristic(hap.Characteristic.MotionDetected).updateValue(this.switchTriggerState===idx);
     }
   }
 
