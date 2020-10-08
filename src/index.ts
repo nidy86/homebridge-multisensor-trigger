@@ -31,7 +31,7 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
 
   private switchTriggerState = 0;
   private switchOn = false;
-  private timer: any;
+  private timer;
 
   private readonly switchService: Service;
   private readonly informationService: Service;
@@ -40,7 +40,7 @@ class MultisensorTriggerAccessory implements AccessoryPlugin {
   constructor(
     log: Logging, 
     config: AccessoryConfig, 
-    api: API
+    api: API,
   ) {
     this.log = log;
     this.name = config.name;
